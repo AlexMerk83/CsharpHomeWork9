@@ -95,6 +95,31 @@ void Task68AckermannFunction()
     ConsoleIOHandler consIO = new ConsoleIOHandler();
 
     Console.Clear();
+
+    System.Console.WriteLine("Ackermann function A(m, n)");
+
+    int m = consIO.ReadInt("m", 0, 5, "It is impossible to show the result for m > {1}");
+    int n = 0;
+
+    if (m <= 3)
+        n = consIO.ReadInt("n", 0, int.MaxValue, "It is impossible to show the result for entered m and n > {1}");
+    else if (m == 4)
+        n = consIO.ReadInt("n", 0, 1, "It is impossible to show the result for entered m and n > {1}");
+    else System.Console.WriteLine("For m = 5 it is only possible to show the result for n = 0");
     
+    System.Console.WriteLine($"A({m}, {n}) = {Ack(m, n)}");
 }
+
+
+int Ack (int m, int n)
+{
+    if (m == 0)
+        return n + 1;
+    else if (n == 0)
+        return Ack(m - 1, 1);
+    else
+        return Ack(m - 1, Ack(m, n - 1));
+
+}
+
 #endregion

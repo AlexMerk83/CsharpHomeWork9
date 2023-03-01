@@ -117,6 +117,30 @@ namespace ConsoleIO
 
             return parsedNum;
         }
+
+        public uint ReadUInt(string argument, uint minValue, uint maxValue, string errorMessage = defaultRangeErrorMessage)
+        {
+            uint parsedNum = 0;
+            int inputFieldX = 0,
+                inputFieldY = 0;
+
+            System.Console.Write($"Enter {argument}: ");
+            inputFieldX = Console.CursorLeft;
+            inputFieldY = Console.CursorTop;
+            while (!uint.TryParse(Console.ReadLine(), out parsedNum) || parsedNum < minValue || parsedNum > maxValue)
+            {
+                Console.SetCursorPosition(0, inputFieldY);
+                ClearLine();
+                System.Console.WriteLine($"Enter {argument}: ");
+                System.Console.WriteLine(errorMessage, minValue, maxValue);
+                Console.SetCursorPosition(inputFieldX, inputFieldY);
+            }
+
+            ClearLine();
+
+            return parsedNum;
+        }
+
         #endregion
     }
     #endregion
